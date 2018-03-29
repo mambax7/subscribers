@@ -33,7 +33,7 @@ if ($truekey != $key) {
 }
 
 $userHandler = xoops_getModuleHandler('user');
-$criteria    = new Criteria('user_email', $email);
+$criteria    = new \Criteria('user_email', $email);
 $users       = $userHandler->getObjects($criteria);
 
 unset($criteria);
@@ -47,7 +47,7 @@ $userHandler->delete($user, true);
 
 //delete all wating emails related to this user
 $wtHandler = xoops_getModuleHandler('waiting');
-$criteria  = new Criteria('wt_toemail', $email);
+$criteria  = new \Criteria('wt_toemail', $email);
 $wtHandler->deleteAll($criteria);
 unset($criteria);
 

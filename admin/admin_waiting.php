@@ -51,7 +51,7 @@ function waiting_index($start = 0)
     $count = $thisHandler->getCount();
     $xoopsTpl->assign('count', $count);
 
-    $criteria = new CriteriaCompo();
+    $criteria = new \CriteriaCompo();
     $criteria->setSort('wt_priority DESC, wt_created');
     $criteria->setOrder('ASC');
     $criteria->setStart($start);
@@ -61,7 +61,7 @@ function waiting_index($start = 0)
     if ($count > 0) {
         if ($count > $limit) {
             require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-            $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+            $nav = new \XoopsPageNav($count, $limit, $start, 'start', 'op=list');
             $xoopsTpl->assign('pag', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
         } else {
             $xoopsTpl->assign('pag', '');

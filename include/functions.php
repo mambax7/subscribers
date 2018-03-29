@@ -3,7 +3,7 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 function subscribers_adminMenu($currentoption = 0, $breadcrumb = '')
 {
@@ -13,7 +13,7 @@ function subscribers_adminMenu($currentoption = 0, $breadcrumb = '')
     xoops_loadLanguage('admin', 'subscribers');
     xoops_loadLanguage('modinfo', 'subscribers');
 
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign([
                      'modurl'          => XOOPS_URL . '/modules/subscribers',
                      'headermenu'      => $subscribers_headermenu,
@@ -81,7 +81,7 @@ function subscribers_sendEmails()
 
     $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
 
-    $criteria = new CriteriaCompo();
+    $criteria = new \CriteriaCompo();
     $criteria->setSort('wt_priority DESC, wt_created');
     $criteria->setOrder('ASC');
     $criteria->setLimit($emailsperpack);
@@ -117,7 +117,7 @@ function subscribers_sendEmails()
         $obj_delete[] = $obj->getVar('wt_id');
     }
 
-    $criteria = new Criteria('wt_id', '(' . implode(',', $obj_delete) . ')', 'IN');
+    $criteria = new \Criteria('wt_id', '(' . implode(',', $obj_delete) . ')', 'IN');
     $thisHandler->deleteAll($criteria, true);
 
     subscribers_setLastTime($now);

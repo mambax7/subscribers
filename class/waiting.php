@@ -3,7 +3,7 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 class SubscribersWaiting extends XoopsObject
 {
@@ -41,7 +41,7 @@ class SubscribersWaiting extends XoopsObject
 
 class SubscribersWaitingHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'subscribers_waiting', 'SubscribersWaiting', 'wt_id', 'wt_subject');
     }

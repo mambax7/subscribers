@@ -39,11 +39,11 @@ if (false === xoops_load('PHPExcel', 'framework')) {
 }
 if (_CHARSET === 'windows-1256') {
     include PHPEXCEL_ROOT . '/xoopsPHPExcelArabic.php';
-    $exporter                 = new XoopsPHPExcelArabic();
+    $exporter                 = new \XoopsPHPExcelArabic();
     $exporter->convertCharset = true;
 } else {
     include PHPEXCEL_ROOT . '/xoopsPHPExcelAbstract.php';
-    $exporter = new XoopsPHPExcelAbstract();
+    $exporter = new \XoopsPHPExcelAbstract();
 }
 
 //$exporter->debug = true;

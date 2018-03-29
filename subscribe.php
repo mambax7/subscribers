@@ -35,7 +35,7 @@ if (!in_array($country, array_keys($countries))) {
 }
 
 $userHandler = xoops_getModuleHandler('user');
-$criteria    = new Criteria('user_email', $myts->addSlashes($email));
+$criteria    = new \Criteria('user_email', $myts->addSlashes($email));
 $count       = $userHandler->getCount($criteria);
 unset($criteria);
 

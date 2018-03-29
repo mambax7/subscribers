@@ -3,6 +3,10 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
+use XoopsModules\Subscribers;
+/** @var Subscribers\Helper $helper */
+$helper = Subscribers\Helper::getInstance();
+
 require_once __DIR__ . '/admin_header.php';
 
 if (!empty($_POST)) {
@@ -67,18 +71,18 @@ function user_index($start = 0)
 
     $criteria = null;
     if (!is_null($query)) {
-        $criteria = new Criteria('user_email', $myts->addSlashes($query) . '%', 'LIKE');
+        $criteria = new \Criteria('user_email', $myts->addSlashes($query) . '%', 'LIKE');
     }
 
     $count = $thisHandler->getCount($criteria);
     $xoopsTpl->assign('count', $count);
 
     $mHandler    = xoops_getHandler('member');
-    $users_count = $mHandler->getUserCount(new Criteria('level', 0, '>'));
+    $users_count = $mHandler->getUserCount(new \Criteria('level', 0, '>'));
     $xoopsTpl->assign('users_count', $users_count);
     $xoopsTpl->assign('total_count', $users_count + $count);
 
-    $criteria = new CriteriaCompo($criteria);
+    $criteria = new \CriteriaCompo($criteria);
     $criteria->setSort('user_id');
     $criteria->setOrder('DESC');
     $criteria->setStart($start);
@@ -89,7 +93,7 @@ function user_index($start = 0)
     if ($count > 0) {
         if ($count > $limit) {
             require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-            $nav = new XoopsPageNav($count, $limit, $start, 'start', 'op=list');
+            $nav = new \XoopsPageNav($count, $limit, $start, 'start', 'op=list');
             $xoopsTpl->assign('pag', '<div style="float:left; padding-top:2px;" align="center">' . $nav->renderNav() . '</div>');
         } else {
             $xoopsTpl->assign('pag', '');
@@ -120,7 +124,7 @@ function user_add($id)
 
     $thisHandler = xoops_getModuleHandler('user', 'subscribers');
 
-    $criteria = new Criteria('user_id', $id);
+    $criteria = new \Criteria('user_id', $id);
     $count    = $thisHandler->getCount($criteria);
     if ($count > 0) {
         $obj = $thisHandler->get($id);
@@ -209,7 +213,10 @@ function user_confirmdel($id, $redir = null)
 
 function user_form($id = null)
 {
-    global $xoopsUser, $xoopsConfig, $xoopsModuleConfig;
+    global $xoopsUser, $xoopsConfig ;
+    /** @var Subscribers\Helper $helper */
+    $helper = Subscribers\Helper::getInstance();
+
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     $thisHandler = xoops_getModuleHandler('user', 'subscribers');
@@ -229,28 +236,28 @@ function user_form($id = null)
         $name    = '';
         $email   = '';
         $phone   = '';
-        $country = $xoopsModuleConfig['country'];
+        $country = $helper->getConfig('country');
     }
 
-    $form = new XoopsThemeForm($title, 'user_form', 'admin_user.php', 'post', true);
+    $form = new \XoopsThemeForm($title, 'user_form', 'admin_user.php', 'post', true);
 
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
     $countries = XoopsLists::getCountryList();
     unset($countries['']);
 
-    $element = new XoopsFormSelect(_AM_SUBSCRIBERS_COUNTRY, 'user_country', $country);
+    $element = new \XoopsFormSelect(_AM_SUBSCRIBERS_COUNTRY, 'user_country', $country);
     $element->addOptionArray($countries);
     $form->addElement($element);
     unset($element);
 
-    $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_NAME, 'user_name', 50, 50, $name));
-    $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_EMAIL, 'user_email', 50, 50, $email));
-    $form->addElement(new XoopsFormText(_AM_SUBSCRIBERS_PHONE, 'user_phone', 50, 50, $phone));
+    $form->addElement(new \XoopsFormText(_AM_SUBSCRIBERS_NAME, 'user_name', 50, 50, $name));
+    $form->addElement(new \XoopsFormText(_AM_SUBSCRIBERS_EMAIL, 'user_email', 50, 50, $email));
+    $form->addElement(new \XoopsFormText(_AM_SUBSCRIBERS_PHONE, 'user_phone', 50, 50, $phone));
 
-    $tray = new XoopsFormElementTray('', '');
-    $tray->addElement(new XoopsFormButton('', 'submit_button', _SUBMIT, 'submit'));
+    $tray = new \XoopsFormElementTray('', '');
+    $tray->addElement(new \XoopsFormButton('', 'submit_button', _SUBMIT, 'submit'));
 
-    $btn = new XoopsFormButton('', 'reset', _CANCEL, 'button');
+    $btn = new \XoopsFormButton('', 'reset', _CANCEL, 'button');
 
     if (@is_object($obj)) {
         $btn->setExtra('onclick="document.location.href=\'admin_user.php?op=list\'"');
@@ -261,10 +268,10 @@ function user_form($id = null)
     $form->addElement($tray);
 
     if (@is_object($obj)) {
-        $form->addElement(new XoopsFormHidden('op', 'editok'));
-        $form->addElement(new XoopsFormHidden('id', $id));
+        $form->addElement(new \XoopsFormHidden('op', 'editok'));
+        $form->addElement(new \XoopsFormHidden('id', $id));
     } else {
-        $form->addElement(new XoopsFormHidden('op', 'add'));
+        $form->addElement(new \XoopsFormHidden('op', 'add'));
     }
 
     return $form->render();
