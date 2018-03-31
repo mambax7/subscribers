@@ -108,13 +108,13 @@ function send_form()
 function send_email()
 {
     $vars                = [];
-    $vars['wt_priority'] = isset($_POST['priority']) ? $_POST['priority'] : 5;
+    $vars['wt_priority'] = \Xmf\Request::getInt('priority', 5, 'POST');
     $vars['wt_created']  = time();
 
     $subject = isset($_POST['subject']) ? trim($_POST['subject']) : '';
     $body    = isset($_POST['body']) ? trim($_POST['body']) : '';
     $country = isset($_POST['country']) ? $_POST['country'] : 'ALL';
-    $groups  = isset($_POST['groups']) ? $_POST['groups'] : 0;
+    $groups  = \Xmf\Request::getInt('groups', 0, POST);
 
     $userHandler = xoops_getModuleHandler('user', 'subscribers');
     $wtHandler   = xoops_getModuleHandler('waiting', 'subscribers');

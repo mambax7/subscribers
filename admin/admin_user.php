@@ -21,10 +21,10 @@ if (!empty($_GET)) {
 }
 
 $op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'list');
-$id = isset($_GET['id']) ? (int)$_GET['id'] : (isset($_POST['id']) ? (int)$_POST['id'] : null);
+$id = \Xmf\Request::getInt('id', (isset($_POST['id']) ? (int)$_POST['id'] : null), 'GET');
 
-$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : (isset($_POST['limit']) ? (int)$_POST['limit'] : 15);
-$start = isset($_GET['start']) ? (int)$_GET['start'] : (isset($_POST['start']) ? (int)$_POST['start'] : 0);
+$limit = \Xmf\Request::getInt('limit', (isset($_POST['limit']) ? (int)$_POST['limit'] : 15), 'GET');
+$start = \Xmf\Request::getInt('start', (isset($_POST['start']) ? (int)$_POST['start'] : 0), 'GET');
 $redir = isset($_GET['redir']) ? $_GET['redir'] : (isset($_POST['redir']) ? $_POST['redir'] : null);
 
 switch ($op) {
