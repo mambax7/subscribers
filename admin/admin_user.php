@@ -4,10 +4,11 @@
 //  E-Mail: lusopoemas@gmail.com
 
 use XoopsModules\Subscribers;
-/** @var Subscribers\Helper $helper */
-$helper = Subscribers\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
+
+/** @var Subscribers\Helper $helper */
+$helper = Subscribers\Helper::getInstance();
 
 if (!empty($_POST)) {
     foreach ($_POST as $k => $v) {
@@ -70,7 +71,7 @@ function user_index($start = 0)
     $xoopsTpl->assign('query', $query);
 
     $criteria = null;
-    if (!is_null($query)) {
+    if (null !== $query) {
         $criteria = new \Criteria('user_email', $myts->addSlashes($query) . '%', 'LIKE');
     }
 
@@ -187,7 +188,7 @@ function user_del($id, $redir = null)
         exit();
     }
 
-    redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_user.php', 2, _AM_SUBSCRIBERS_SUCCESS);
+    redirect_header(null !== $redir ? base64_decode($redir) : 'admin_user.php', 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
 function user_confirmdel($id, $redir = null)
@@ -202,7 +203,7 @@ function user_confirmdel($id, $redir = null)
     $arr       = [];
     $arr['op'] = 'delok';
     $arr['id'] = $id;
-    if (!is_null($redir)) {
+    if (null !== $redir) {
         $arr['redir'] = $redir;
     }
 

@@ -106,7 +106,7 @@ function waiting_del($id, $redir = null)
         exit();
     }
 
-    redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_SUCCESS);
+    redirect_header(null !== $redir ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
 function waiting_delall($redir = null)
@@ -118,10 +118,10 @@ function waiting_delall($redir = null)
     $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
 
     if (!$thisHandler->deleteAll()) {
-        redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_ERROR);
+        redirect_header(null !== $redir ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_ERROR);
     }
 
-    redirect_header(!is_null($redir) ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_SUCCESS);
+    redirect_header(null !== $redir ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
 function waiting_confirmdel($id, $redir = null, $op = 'delok')
@@ -136,7 +136,7 @@ function waiting_confirmdel($id, $redir = null, $op = 'delok')
     $arr       = [];
     $arr['op'] = $op;
     $arr['id'] = $id;
-    if (!is_null($redir)) {
+    if (null !== $redir) {
         $arr['redir'] = $redir;
     }
 
