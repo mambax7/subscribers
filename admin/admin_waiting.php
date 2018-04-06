@@ -8,10 +8,10 @@ require_once __DIR__ . '/admin_header.php';
 $op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'list');
 $op = isset($_POST['delall']) ? 'delall' : $op;
 
-$id = \Xmf\Request::getInt('id', (isset($_POST['id']) ? (int)$_POST['id'] : null), 'GET');
+$id = \Xmf\Request::getInt('id', \Xmf\Request::getInt('id', null, 'POST'), 'GET');
 
-$limit = \Xmf\Request::getInt('limit', (isset($_POST['limit']) ? (int)$_POST['limit'] : 15), 'GET');
-$start = \Xmf\Request::getInt('start', (isset($_POST['start']) ? (int)$_POST['start'] : 0), 'GET');
+$limit = \Xmf\Request::getInt('limit', \Xmf\Request::getInt('limit', 15, 'POST'), 'GET');
+$start = \Xmf\Request::getInt('start', \Xmf\Request::getInt('start', 0, 'POST'), 'GET');
 $redir = isset($_GET['redir']) ? $_GET['redir'] : (isset($_POST['redir']) ? $_POST['redir'] : null);
 
 switch ($op) {
