@@ -3,9 +3,11 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
+use Xmf\Request;
+
 require_once __DIR__ . '/../../mainfile.php';
 
-$redirect = $_SERVER['HTTP_REFERER'];
+$redirect = Request::getString('HTTP_REFERER', '', 'SERVER');
 
 xoops_load('captcha');
 $xoopsCaptcha = XoopsCaptcha::getInstance();
