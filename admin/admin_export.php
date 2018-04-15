@@ -8,7 +8,7 @@ error_reporting(0);
 $xoopsLogger->activated = false;
 
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-$countries = XoopsLists::getCountryList();
+$countries = \XoopsLists::getCountryList();
 
 $header   = [
     'user_email'   => _AM_SUBSCRIBERS_EMAIL,

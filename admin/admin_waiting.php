@@ -71,7 +71,7 @@ function waiting_index($start = 0)
     }
 
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-    $countries = XoopsLists::getCountryList();
+    $countries = \XoopsLists::getCountryList();
 
     foreach ($objs as $obj) {
         $objArray               = $obj->toArray();

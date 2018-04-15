@@ -5,7 +5,7 @@
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-class SubscribersUser extends XoopsObject
+class SubscribersUser extends \XoopsObject
 {
     /**
      * constructor
@@ -32,7 +32,7 @@ class SubscribersUser extends XoopsObject
     }
 }
 
-class SubscribersUserHandler extends XoopsPersistableObjectHandler
+class SubscribersUserHandler extends \XoopsPersistableObjectHandler
 {
     public function __construct(\XoopsDatabase $db)
     {

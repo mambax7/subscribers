@@ -4,10 +4,11 @@
 //  E-Mail: lusopoemas@gmail.com
 
 use XoopsModules\Subscribers;
-/** @var Subscribers\Helper $helper */
-$helper = Subscribers\Helper::getInstance();
 
 require_once __DIR__ . '/admin_header.php';
+
+/** @var Subscribers\Helper $helper */
+$helper = Subscribers\Helper::getInstance();
 
 $op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'form');
 
@@ -48,7 +49,7 @@ function send_form()
     // Country
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
     $countries  = ['ALL' => _AM_SUBSCRIBERS_ALL_COUNTRIES];
-    $countries2 = XoopsLists::getCountryList();
+    $countries2 = \XoopsLists::getCountryList();
     array_shift($countries2);
     $countries += $countries2;
 

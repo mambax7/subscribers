@@ -5,7 +5,7 @@
 
 use Xmf\Request;
 
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 $redirect = Request::getString('HTTP_REFERER', '', 'SERVER');
 
@@ -31,7 +31,7 @@ if (strrpos($email, ' ') > 0) {
 }
 
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-$countries = XoopsLists::getCountryList();
+$countries = \XoopsLists::getCountryList();
 if (!in_array($country, array_keys($countries))) {
     redirect_header($redirect, 2, _MD_SUBSCRIBERS_NO_THANKS);
 }

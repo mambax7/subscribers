@@ -11,7 +11,7 @@ function subscribers_add_show($options)
     $config =& subscribers_getModuleConfig();
     $block  = [];
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-    $block['countries'] = XoopsLists::getCountryList();
+    $block['countries'] = \XoopsLists::getCountryList();
     $block['selected']  = $config['country'];
     array_shift($block['countries']);
     $sub_captcha = $config['captcha'];

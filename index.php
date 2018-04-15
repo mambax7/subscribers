@@ -3,7 +3,7 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once XOOPS_ROOT_PATH . '/modules/subscribers/include/functions.php';
 subscribers_sendEmails();
 
@@ -21,7 +21,7 @@ if (is_object($xoopsUser)) {
 }
 
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-$countries = XoopsLists::getCountryList();
+$countries = \XoopsLists::getCountryList();
 array_shift($countries);
 
 $xoopsTpl->assign('countries', $countries);

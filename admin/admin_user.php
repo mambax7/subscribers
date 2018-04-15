@@ -104,7 +104,7 @@ function user_index($start = 0)
     }
 
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-    $countries = XoopsLists::getCountryList();
+    $countries = \XoopsLists::getCountryList();
 
     foreach ($objs as $obj) {
         $objArray                 = $obj->toArray();
@@ -243,7 +243,7 @@ function user_form($id = null)
     $form = new \XoopsThemeForm($title, 'user_form', 'admin_user.php', 'post', true);
 
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-    $countries = XoopsLists::getCountryList();
+    $countries = \XoopsLists::getCountryList();
     unset($countries['']);
 
     $element = new \XoopsFormSelect(_AM_SUBSCRIBERS_COUNTRY, 'user_country', $country);

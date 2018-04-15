@@ -17,7 +17,7 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 if (!isset($_GET['email']) || !isset($_GET['key'])) {
     redirect_header(XOOPS_URL, 2, _MD_SUBSCRIBERS_U_NO_THANKS);
