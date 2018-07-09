@@ -25,6 +25,5 @@ define('_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2', 'ÊÝÚíáåÇ ááÒæÇÑ ÝÞ
 define('_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3', 'ÊÚØíáåÇ');
 define('_MI_SUBSCRIBERS_EXPORT', 'ÊÕÏíÑ');
 
-
 define('_MI_SUBSCRIBERS_HOME', 'Home');
 define('_MI_SUBSCRIBERS_ABOUT', 'About');

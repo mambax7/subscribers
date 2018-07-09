@@ -22,13 +22,13 @@ define('_MI_SUBSCRIBERS_CONF_CAPTCHA', 'Anti Spam');
 define('_MI_SUBSCRIBERS_CONF_CAPTCHA_DSC', '');
 define('_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE1', 'Activate to users and visitors');
 define('_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE2', 'Activate to visitors only');
-define('_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3', 'Desactivate');
+define('_MI_SUBSCRIBERS_CONF_CAPTCHA_CHOICE3', 'Deactivate');
 define('_MI_SUBSCRIBERS_EXPORT', 'Export');
 
 //1.2
 //Help
 define('_MI_SUBSCRIBERS_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_SUBSCRIBERS_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_SUBSCRIBERS_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_SUBSCRIBERS_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_SUBSCRIBERS_OVERVIEW', 'Overview');
 

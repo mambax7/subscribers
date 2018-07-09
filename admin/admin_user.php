@@ -21,12 +21,13 @@ if (!empty($_GET)) {
     }
 }
 
-$op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'list');
-$id = \Xmf\Request::getInt('id', \Xmf\Request::getInt('id', null, 'POST'), 'GET');
+$op =  \Xmf\Request::getCmd('op', 'list');
+$id =  \Xmf\Request::getInt('id', null);
 
-$limit = \Xmf\Request::getInt('limit', \Xmf\Request::getInt('limit', 15, 'POST'), 'GET');
-$start = \Xmf\Request::getInt('start', \Xmf\Request::getInt('start', 0, 'POST'), 'GET');
-$redir = isset($_GET['redir']) ? $_GET['redir'] : (isset($_POST['redir']) ? $_POST['redir'] : null);
+$limit = \Xmf\Request::getInt('limit', 15);
+$start = \Xmf\Request::getInt('start', 0);
+
+$redir = \Xmf\Request::getString('redir', null);;
 
 switch ($op) {
     case 'list':
@@ -57,6 +58,10 @@ switch ($op) {
         break;
 }
 
+/**
+ * @param int $start
+ * @return mixed|string|void
+ */
 function user_index($start = 0)
 {
     global $xoopsTpl, $xoopsUser, $xoopsConfig, $limit;
@@ -64,7 +69,7 @@ function user_index($start = 0)
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    $thisHandler   = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler   = new Subscribers\UserHandler();
     $moduleHandler = xoops_getHandler('module');
 
     $query = isset($_POST['query']) ? $_POST['query'] : null;
@@ -117,13 +122,16 @@ function user_index($start = 0)
     return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_user.tpl');
 }
 
+/**
+ * @param $id
+ */
 function user_add($id)
 {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('admin_user.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    $thisHandler = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler = new Subscribers\UserHandler();
 
     $criteria = new \Criteria('user_id', $id);
     $count    = $thisHandler->getCount($criteria);
@@ -144,13 +152,16 @@ function user_add($id)
     redirect_header('admin_user.php', 2, $msg);
 }
 
+/**
+ * @param $id
+ */
 function user_edit($id)
 {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('admin_user.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    $thisHandler = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler = new Subscribers\UserHandler();
     $obj         = $thisHandler->get($id);
 
     $obj->setVars($_POST);
@@ -165,6 +176,10 @@ function user_edit($id)
     redirect_header('admin_user.php', 2, $msg);
 }
 
+/**
+ * @param int     $id
+ * @param null|string $redir
+ */
 function user_del($id, $redir = null)
 {
     if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -175,7 +190,7 @@ function user_del($id, $redir = null)
         redirect_header('admin_user.php', 1);
     }
 
-    $thisHandler = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler = new Subscribers\UserHandler();
     $obj         = $thisHandler->get($id);
     if (!is_object($obj)) {
         redirect_header('admin_user.php', 1);
@@ -191,11 +206,15 @@ function user_del($id, $redir = null)
     redirect_header(null !== $redir ? base64_decode($redir) : 'admin_user.php', 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
+/**
+ * @param int     $id
+ * @param null|string $redir
+ */
 function user_confirmdel($id, $redir = null)
 {
     global $xoopsConfig;
 
-    $thisHandler = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler = new Subscribers\UserHandler();
     $obj         = $thisHandler->get($id);
 
     xoops_cp_header();
@@ -212,17 +231,21 @@ function user_confirmdel($id, $redir = null)
     xoops_cp_footer();
 }
 
+/**
+ * @param null|int $id
+ * @return string
+ */
 function user_form($id = null)
 {
-    global $xoopsUser, $xoopsConfig ;
+    global $xoopsUser, $xoopsConfig;
     /** @var Subscribers\Helper $helper */
     $helper = Subscribers\Helper::getInstance();
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    $thisHandler = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler = new Subscribers\UserHandler();
 
-    if (isset($id)) {
+    if (null !== $id) {
         $obj = $thisHandler->get($id);
     }
 

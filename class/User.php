@@ -1,11 +1,16 @@
-<?php
+<?php namespace XoopsModules\Subscribers;
+
 //  Author: Trabis
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-class SubscribersUser extends \XoopsObject
+/**
+ * Class User
+ * @package XoopsModules\Subscribers
+ */
+class User extends \XoopsObject
 {
     /**
      * constructor
@@ -20,6 +25,9 @@ class SubscribersUser extends \XoopsObject
         $this->initVar('user_created', XOBJ_DTYPE_INT, null, false);
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         $ret  = [];
@@ -29,13 +37,5 @@ class SubscribersUser extends \XoopsObject
         }
 
         return $ret;
-    }
-}
-
-class SubscribersUserHandler extends \XoopsPersistableObjectHandler
-{
-    public function __construct(\XoopsDatabase $db)
-    {
-        parent::__construct($db, 'subscribers_user', 'SubscribersUser', 'user_id', 'user_email');
     }
 }

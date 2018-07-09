@@ -1,11 +1,16 @@
-<?php
+<?php namespace XoopsModules\Subscribers;
+
 //  Author: Trabis
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-class SubscribersWaiting extends \XoopsObject
+/**
+ * Class Waiting
+ * @package XoopsModules\Subscribers
+ */
+class Waiting extends \XoopsObject
 {
     /**
      * constructor
@@ -27,6 +32,9 @@ class SubscribersWaiting extends \XoopsObject
         $this->initVar('dobr', XOBJ_DTYPE_INT, 1);
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         $ret  = [];
@@ -36,13 +44,5 @@ class SubscribersWaiting extends \XoopsObject
         }
 
         return $ret;
-    }
-}
-
-class SubscribersWaitingHandler extends \XoopsPersistableObjectHandler
-{
-    public function __construct(\XoopsDatabase $db)
-    {
-        parent::__construct($db, 'subscribers_waiting', 'SubscribersWaiting', 'wt_id', 'wt_subject');
     }
 }

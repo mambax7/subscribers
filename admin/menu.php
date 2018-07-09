@@ -5,13 +5,12 @@
 
 use XoopsModules\Subscribers;
 
-// require_once  dirname(__DIR__) . '/class/Helper.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
+/** @var Subscribers\Helper $helper */
 $helper = Subscribers\Helper::getInstance();
 
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
-
 
 // Index
 $adminmenu[] = [

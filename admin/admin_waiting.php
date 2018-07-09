@@ -3,6 +3,8 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
+use XoopsModules\Subscribers;
+
 require_once __DIR__ . '/admin_header.php';
 
 $op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'list');
@@ -37,6 +39,10 @@ switch ($op) {
         break;
 }
 
+/**
+ * @param int $start
+ * @return mixed|string|void
+ */
 function waiting_index($start = 0)
 {
     global $xoopsTpl, $xoopsUser, $xoopsConfig, $limit;
@@ -46,7 +52,7 @@ function waiting_index($start = 0)
 
     subscribers_sendEmails();
 
-    $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
+    $thisHandler = new Subscribers\WaitingHandler();
 
     $count = $thisHandler->getCount();
     $xoopsTpl->assign('count', $count);
@@ -83,6 +89,10 @@ function waiting_index($start = 0)
     return $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_waiting.tpl');
 }
 
+/**
+ * @param      $id
+ * @param null $redir
+ */
 function waiting_del($id, $redir = null)
 {
     if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -93,7 +103,7 @@ function waiting_del($id, $redir = null)
         redirect_header('admin_waiting.php', 1);
     }
 
-    $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
+    $thisHandler = new Subscribers\WaitingHandler();
     $obj         = $thisHandler->get($id);
     if (!is_object($obj)) {
         redirect_header('admin_waiting.php', 1);
@@ -109,13 +119,16 @@ function waiting_del($id, $redir = null)
     redirect_header(null !== $redir ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
+/**
+ * @param null $redir
+ */
 function waiting_delall($redir = null)
 {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('admin_waiting.php', 1, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
     }
 
-    $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
+    $thisHandler = new Subscribers\WaitingHandler();
 
     if (!$thisHandler->deleteAll()) {
         redirect_header(null !== $redir ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_ERROR);
@@ -124,11 +137,16 @@ function waiting_delall($redir = null)
     redirect_header(null !== $redir ? base64_decode($redir) : 'admin_waiting.php', 2, _AM_SUBSCRIBERS_SUCCESS);
 }
 
+/**
+ * @param        $id
+ * @param null   $redir
+ * @param string $op
+ */
 function waiting_confirmdel($id, $redir = null, $op = 'delok')
 {
     global $xoopsConfig;
 
-    $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
+    $thisHandler = new Subscribers\WaitingHandler();
     $obj         = $thisHandler->get($id);
 
     xoops_cp_header();

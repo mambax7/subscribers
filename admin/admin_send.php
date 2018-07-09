@@ -10,7 +10,8 @@ require_once __DIR__ . '/admin_header.php';
 /** @var Subscribers\Helper $helper */
 $helper = Subscribers\Helper::getInstance();
 
-$op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'form');
+//$op = isset($_GET['op']) ? trim($_GET['op']) : (isset($_POST['op']) ? trim($_POST['op']) : 'form');
+$op =  \Xmf\Request::getCmd('op', 'form');
 
 switch ($op) {
     case 'email':
@@ -27,6 +28,9 @@ switch ($op) {
         break;
 }
 
+/**
+ * @return string
+ */
 function send_form()
 {
     /** @var Subscribers\Helper $helper */
@@ -34,7 +38,7 @@ function send_form()
 
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    $thisHandler = xoops_getModuleHandler('user', 'subscribers');
+    $thisHandler = new Subscribers\UserHandler();
 
     $form = new \XoopsThemeForm(_AM_SUBSCRIBERS_SEND, 'send_form', 'admin_send.php', 'post', true);
 
@@ -112,13 +116,13 @@ function send_email()
     $vars['wt_priority'] = \Xmf\Request::getInt('priority', 5, 'POST');
     $vars['wt_created']  = time();
 
-    $subject = isset($_POST['subject']) ? trim($_POST['subject']) : '';
-    $body    = isset($_POST['body']) ? trim($_POST['body']) : '';
+    $subject = \Xmf\Request::getString('subject', '','POST');
+    $body    = \Xmf\Request::getText('body', '','POST');
     $country = isset($_POST['country']) ? $_POST['country'] : 'ALL';
-    $groups  = \Xmf\Request::getInt('groups', 0, POST);
+    $groups  = \Xmf\Request::getInt('groups', 0, 'POST');
 
-    $userHandler = xoops_getModuleHandler('user', 'subscribers');
-    $wtHandler   = xoops_getModuleHandler('waiting', 'subscribers');
+    $userHandler = new Subscribers\UserHandler();
+    $wtHandler   = new Subscribers\WaitingHandler();
 
     $error = false;
 

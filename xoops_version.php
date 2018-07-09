@@ -3,21 +3,21 @@
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$modversion['version']       = 1.2;
-$modversion['module_status'] = 'Beta 2';
-$modversion['release_date']  = '2017/07/23';
-$modversion['name']          = _MI_SUBSCRIBERS_MD_NAME;
-$modversion['description']   = _MI_SUBSCRIBERS_MD_DSC;
-$modversion['author']        = 'Trabis - www.xuups.com, credit: www.arabxoops.com';
-$modversion['credits']       = 'Mowaffaq & Mariane - www.arabxoops.com';
-$modversion['help']          = 'page=help';
-$modversion['license']       = 'GNU GPL 2.0';
-$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']      = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['dirname']       = basename(__DIR__);
-$modversion['image']         = 'assets/images/logoModule.png';
-$modversion['modicons16'] = 'assets/images/icons/16';
-$modversion['modicons32'] = 'assets/images/icons/32';
+$modversion['version']             = 1.2;
+$modversion['module_status']       = 'Beta 2';
+$modversion['release_date']        = '2017/07/23';
+$modversion['name']                = _MI_SUBSCRIBERS_MD_NAME;
+$modversion['description']         = _MI_SUBSCRIBERS_MD_DSC;
+$modversion['author']              = 'Trabis - www.xuups.com, credit: www.arabxoops.com';
+$modversion['credits']             = 'Mowaffaq & Mariane - www.arabxoops.com';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL 2.0';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+$modversion['dirname']             = basename(__DIR__);
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['release_file']        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/docs/changelog.txt';
 $modversion['demo_site_url']       = '';
 $modversion['demo_site_name']      = '';
@@ -25,7 +25,7 @@ $modversion['module_website_url']  = 'https://xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['author_website_url']  = 'http://www.myweb.ne.jp';
 $modversion['author_website_name'] = 'Kazumi Ono';
-$modversion['min_php']             = '5.5';
+$modversion['min_php']             = '5.6';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];

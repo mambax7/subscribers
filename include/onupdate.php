@@ -20,8 +20,7 @@
 use XoopsModules\Subscribers;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()
-) {
+    || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -34,7 +33,7 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
 /**
@@ -49,8 +48,8 @@ function xoops_module_pre_update_subscribers(\XoopsModule $module)
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Subscribers\Helper $helper */
     /** @var Subscribers\Utility $utility */
-    $helper       = Subscribers\Helper::getInstance();
-    $utility      = new Subscribers\Utility();
+    $helper  = Subscribers\Helper::getInstance();
+    $utility = new Subscribers\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -74,8 +73,8 @@ function xoops_module_update_subscribers(\XoopsModule $module, $previousVersion 
     /** @var Subscribers\Helper $helper */
     /** @var Subscribers\Utility $utility */
     /** @var Subscribers\Common\Configurator $configurator */
-    $helper  = Subscribers\Helper::getInstance();
-    $utility = new Subscribers\Utility();
+    $helper       = Subscribers\Helper::getInstance();
+    $utility      = new Subscribers\Utility();
     $configurator = new Subscribers\Common\Configurator();
 
     if ($previousVersion < 240) {
@@ -131,7 +130,7 @@ function xoops_module_update_subscribers(\XoopsModule $module, $previousVersion 
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file =  dirname(__DIR__) . '/assets/images/blank.png';
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyBlankFiles) as $i) {
                 $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);

@@ -19,12 +19,12 @@
     ÃÑÝÚ ãÌáÏ ÇáÈÑäÇãÌ Åáì ãÌáÏ ../modules directory. Þã ÈÊÑßíÈ
     ÇáÈÑäÇãÌ ãä ÎáÇá ÕÝÍÉ áæÍÉ ÇáÊÍßã ÇáÚÇãÉ -> ÅÏÇÑÉ ÇáÈÑÇãÌ -> ÇáÈÑÇãÌ. <br><br>
     ÇáÔÑÍ ÇáãÝÕá Úä ßíÝíÉ ÊÑßíÈ ÈÑäÇãÌ Ýí ÒææÈÓ ÊÌÏå Úáì ÇáÑÇÈØ
-    <a href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">Ïáíá ÊÔÛíá ÒææÈÓ</a><br><br>
+    <a href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">Ïáíá ÊÔÛíá ÒææÈÓ</a><br><br>
 
     <h4 class="odd">ÊÚáíãÇÊ ÇáÊÔÛíá</h4><b>
 
     ÇáÔÑÍ ÇáãÝÕá Úä ßíÝíÉ ÇáÊÚÇãá ãÚ ÇáÈÑÇãÌ æÅÚØÇÁ ÇáÕáÇÍíÇÊ ááÃÚÖÇÁ æÇáãÌãæÚÇÊ ÊÌÏå Úáì ÇáÑÇÈØ
-    <a href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">Ïáíá ÊÔÛíá ÒææÈÓ</a><br><br>
+    <a href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">Ïáíá ÊÔÛíá ÒææÈÓ</a><br><br>
     <h4 class="odd">ÇáÏÑæÓ</h4>
     <b>
         ÛíÑ ãÊæÝÑÉ ÍÇáíÇð

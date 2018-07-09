@@ -3,6 +3,8 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
+use XoopsModules\Subscribers;
+
 require_once __DIR__ . '/admin_header.php';
 error_reporting(0);
 $xoopsLogger->activated = false;
@@ -18,7 +20,7 @@ $header   = [
 ];
 $items    = [];
 $keys     = array_keys($header);
-$uHandler = xoops_getModuleHandler('user', 'subscribers');
+$uHandler = new Subscribers\UserHandler();
 //$objs = $uHandler->getObjects();
 $objs = $uHandler->getAll(null, $keys);
 foreach ($objs as $key => $obj) {

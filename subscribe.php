@@ -4,8 +4,9 @@
 //  E-Mail: lusopoemas@gmail.com
 
 use Xmf\Request;
+use XoopsModules\Subscribers;
 
-require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
 $redirect = Request::getString('HTTP_REFERER', '', 'SERVER');
 
@@ -16,10 +17,10 @@ if (!$xoopsCaptcha->verify()) {
 }
 
 $myts    = \MyTextSanitizer::getInstance();
-$country = isset($_POST['user_country']) ? $myts->stripSlashesGPC($_POST['user_country']) : '';
-$email   = isset($_POST['user_email']) ? trim($myts->stripSlashesGPC($_POST['user_email'])) : '';
-$name    = isset($_POST['user_name']) ? trim($myts->stripSlashesGPC($_POST['user_name'])) : $GLOBALS['xoopsConfig']['anonymous'];
-$phone   = isset($_POST['user_phone']) ? trim($myts->stripSlashesGPC($_POST['user_phone'])) : '';
+$country = \Xmf\Request::getString('user_country', '','POST');
+$email   = \Xmf\Request::getString('user_email', '','POST');
+$name    = \Xmf\Request::getString('user_name', $GLOBALS['xoopsConfig']['anonymous'],'POST');
+$phone   = \Xmf\Request::getString('user_phone', '','POST');
 
 $stop = false;
 
@@ -32,11 +33,11 @@ if (strrpos($email, ' ') > 0) {
 
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 $countries = \XoopsLists::getCountryList();
-if (!in_array($country, array_keys($countries))) {
+if (!array_key_exists($country, $countries)) {
     redirect_header($redirect, 2, _MD_SUBSCRIBERS_NO_THANKS);
 }
 
-$userHandler = xoops_getModuleHandler('user');
+$userHandler = new Subscribers\UserHandler();
 $criteria    = new \Criteria('user_email', $myts->addSlashes($email));
 $count       = $userHandler->getCount($criteria);
 unset($criteria);

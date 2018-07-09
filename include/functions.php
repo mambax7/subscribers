@@ -3,12 +3,18 @@
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
 
+use XoopsModules\Subscribers;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
+/**
+ * @param int    $currentoption
+ * @param string $breadcrumb
+ */
 function subscribers_adminMenu($currentoption = 0, $breadcrumb = '')
 {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
-    include XOOPS_ROOT_PATH . '/modules/subscribers/admin/menu.php';
+    require_once XOOPS_ROOT_PATH . '/modules/subscribers/admin/menu.php';
 
     xoops_loadLanguage('admin', 'subscribers');
     xoops_loadLanguage('modinfo', 'subscribers');
@@ -25,13 +31,16 @@ function subscribers_adminMenu($currentoption = 0, $breadcrumb = '')
     $tpl->display(XOOPS_ROOT_PATH . '/modules/subscribers/templates/static/subscribers_admin_menu.tpl');
 }
 
+/**
+ * @return FALSE|mixed|\XoopsModule
+ */
 function &subscribers_getModuleHandler()
 {
     static $handler;
 
-    if (!isset($handler)) {
+    if (null === $handler) {
         global $xoopsModule;
-        if (isset($xoopsModule) && is_object($xoopsModule) && 'subscribers' === $xoopsModule->getVar('dirname')) {
+        if (null !== $xoopsModule && is_object($xoopsModule) && 'subscribers' === $xoopsModule->getVar('dirname')) {
             $handler = $xoopsModule;
         } else {
             $hModule = xoops_getHandler('module');
@@ -42,13 +51,16 @@ function &subscribers_getModuleHandler()
     return $handler;
 }
 
+/**
+ * @return mixed
+ */
 function &subscribers_getModuleConfig()
 {
     static $config;
 
     if (!$config) {
         global $xoopsModule;
-        if (isset($xoopsModule) && is_object($xoopsModule) && 'subscribers' === $xoopsModule->getVar('dirname')) {
+        if (null !== $xoopsModule && is_object($xoopsModule) && 'subscribers' === $xoopsModule->getVar('dirname')) {
             $config = $GLOBALS['xoopsModuleConfig'];
         } else {
             $handler    =& subscribers_getModuleHandler();
@@ -60,6 +72,9 @@ function &subscribers_getModuleConfig()
     return $config;
 }
 
+/**
+ * @return bool
+ */
 function subscribers_sendEmails()
 {
     global $xoopsConfig;
@@ -79,7 +94,7 @@ function subscribers_sendEmails()
         return false;
     }
 
-    $thisHandler = xoops_getModuleHandler('waiting', 'subscribers');
+    $thisHandler = new Subscribers\WaitingHandler();
 
     $criteria = new \CriteriaCompo();
     $criteria->setSort('wt_priority DESC, wt_created');
@@ -125,6 +140,9 @@ function subscribers_sendEmails()
     return true;
 }
 
+/**
+ * @return int
+ */
 function subscribers_getLastTime()
 {
     $fileName = XOOPS_UPLOAD_PATH . '/subscribers_lasttime.txt';
@@ -141,12 +159,16 @@ function subscribers_getLastTime()
     return $ret;
 }
 
+/**
+ * @param int $time
+ * @return int
+ */
 function subscribers_setLastTime($time = 0)
 {
     $ret      = 0;
     $fileName = XOOPS_UPLOAD_PATH . '/subscribers_lasttime.txt';
     @unlink($fileName);
-    $fileHandler = fopen($fileName, 'w');
+    $fileHandler = fopen($fileName, 'wb');
     if (!$fileHandler) {
         return $ret;
     }

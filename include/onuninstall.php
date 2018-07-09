@@ -36,7 +36,8 @@ function xoops_module_uninstall_subscribers(\XoopsModule $module)
 
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = strtoupper($moduleDirName);
-    $helper             = Subscribers\Helper::getInstance();
+    /** @var Subscribers\Helper $helper */
+    $helper = Subscribers\Helper::getInstance();
 
     /** @var Subscribers\Utility $utility */
     $utility = new Subscribers\Utility();

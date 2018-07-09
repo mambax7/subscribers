@@ -17,7 +17,9 @@
  * @author          trabis <lusopoemas@gmail.com>
  */
 
-require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
+use XoopsModules\Subscribers;
+
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
 if (!isset($_GET['email']) || !isset($_GET['key'])) {
     redirect_header(XOOPS_URL, 2, _MD_SUBSCRIBERS_U_NO_THANKS);
@@ -32,7 +34,7 @@ if ($truekey != $key) {
     redirect_header(XOOPS_URL, 2, _MD_SUBSCRIBERS_U_NO_THANKS);
 }
 
-$userHandler = xoops_getModuleHandler('user');
+$userHandler = new Subscribers\UserHandler();
 $criteria    = new \Criteria('user_email', $email);
 $users       = $userHandler->getObjects($criteria);
 
@@ -46,7 +48,7 @@ $user = $users[0];
 $userHandler->delete($user, true);
 
 //delete all wating emails related to this user
-$wtHandler = xoops_getModuleHandler('waiting');
+$wtHandler = new Subscribers\WaitingHandler();
 $criteria  = new \Criteria('wt_toemail', $email);
 $wtHandler->deleteAll($criteria);
 unset($criteria);
