@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Subscribers;
+
 //  Author: Trabis
 //  URL: http://www.xuups.com
 //  E-Mail: lusopoemas@gmail.com
@@ -7,13 +8,17 @@ if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
 
-class SubscribersWaiting extends XoopsObject
+/**
+ * Class Waiting
+ * @package XoopsModules\Subscribers
+ */
+class Waiting extends \XoopsObject
 {
 
     /**
      * constructor
      */
-    function SubscribersWaiting()
+    function __construct()
     {
         $this->initVar("wt_id", XOBJ_DTYPE_INT, null, false);
         $this->initVar("wt_subject", XOBJ_DTYPE_TXTAREA, null, false);
@@ -31,9 +36,12 @@ class SubscribersWaiting extends XoopsObject
 
     }
 
+    /**
+     * @return array
+     */
     function toArray()
     {
-        $ret = array();
+        $ret = [];
         $vars = $this->getVars();
         foreach (array_keys($vars) as $i) {
             $ret[$i] = $this->getVar($i);
@@ -41,19 +49,3 @@ class SubscribersWaiting extends XoopsObject
         return $ret;
     }
 }
-
-class SubscribersWaitingHandler extends XoopsPersistableObjectHandler
-{
-
-    function SubscribersWaitingHandler(&$db)
-    {
-        $this->__construct($db);
-    }
-
-    function __construct(&$db)
-    {
-        parent::__construct($db, 'subscribers_waiting', 'SubscribersWaiting', 'wt_id', 'wt_subject');
-    }
-
-}
-?>
