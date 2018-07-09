@@ -18,7 +18,7 @@ class Waiting extends \XoopsObject
     /**
      * constructor
      */
-    function __construct()
+    public function __construct()
     {
         $this->initVar("wt_id", XOBJ_DTYPE_INT, null, false);
         $this->initVar("wt_subject", XOBJ_DTYPE_TXTAREA, null, false);
@@ -33,13 +33,12 @@ class Waiting extends \XoopsObject
         $this->initVar("dosmiley", XOBJ_DTYPE_INT, 1);
         $this->initVar("doimage", XOBJ_DTYPE_INT, 1);
         $this->initVar("dobr", XOBJ_DTYPE_INT, 1);
-
     }
 
     /**
      * @return array
      */
-    function toArray()
+    public function toArray()
     {
         $ret = [];
         $vars = $this->getVars();

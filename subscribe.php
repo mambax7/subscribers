@@ -17,10 +17,10 @@ if (!$xoopsCaptcha->verify()) {
 }
 
 $myts    = \MyTextSanitizer::getInstance();
-$country = \Xmf\Request::getString('user_country', '','POST');
-$email   = \Xmf\Request::getString('user_email', '','POST');
-$name    = \Xmf\Request::getString('user_name', $GLOBALS['xoopsConfig']['anonymous'],'POST');
-$phone   = \Xmf\Request::getString('user_phone', '','POST');
+$country = \Xmf\Request::getString('user_country', '', 'POST');
+$email   = \Xmf\Request::getString('user_email', '', 'POST');
+$name    = \Xmf\Request::getString('user_name', $GLOBALS['xoopsConfig']['anonymous'], 'POST');
+$phone   = \Xmf\Request::getString('user_phone', '', 'POST');
 
 $stop = false;
 

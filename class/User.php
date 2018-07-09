@@ -15,7 +15,7 @@ class User extends \XoopsObject
     /**
      * constructor
      */
-    function __construct()
+    public function __construct()
     {
         $this->initVar("user_id", XOBJ_DTYPE_INT, null, false);
         $this->initVar("user_email", XOBJ_DTYPE_TXTAREA, null, false);
@@ -28,7 +28,7 @@ class User extends \XoopsObject
     /**
      * @return array
      */
-    function toArray()
+    public function toArray()
     {
         $ret = [];
         $vars = $this->getVars();

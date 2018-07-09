@@ -116,8 +116,8 @@ function send_email()
     $vars['wt_priority'] = \Xmf\Request::getInt('priority', 5, 'POST');
     $vars['wt_created']  = time();
 
-    $subject = \Xmf\Request::getString('subject', '','POST');
-    $body    = \Xmf\Request::getText('body', '','POST');
+    $subject = \Xmf\Request::getString('subject', '', 'POST');
+    $body    = \Xmf\Request::getText('body', '', 'POST');
     $country = isset($_POST['country']) ? $_POST['country'] : 'ALL';
     $groups  = \Xmf\Request::getInt('groups', 0, 'POST');
 
